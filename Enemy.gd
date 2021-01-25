@@ -1,11 +1,12 @@
 extends KinematicBody2D
 
 const GRAVITY = 10
+const MAX_GRAVITY = 30
 
 var velocity = Vector2.ZERO
 
 func get_input():
-	velocity.y += GRAVITY
+	velocity.y += min(GRAVITY, MAX_GRAVITY)
 	
 func _physics_process(delta):
 	var action = get_input()

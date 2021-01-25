@@ -80,7 +80,7 @@ func _physics_process(delta):
 	var action = get_input()
 	
 	if is_attacking: 
-		friction_modifier = 0.2
+		friction_modifier = -0.2
 	else:
 		friction_modifier = 0
 	
