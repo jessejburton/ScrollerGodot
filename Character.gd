@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 # Constants
 const GRAVITY = 10
-const ACCELERATION = 10
+const ACCELERATION = 20
 const MAX_SPEED = 100
 const JUMP_HEIGHT = -200
 const FRICTION = 0.2
@@ -23,6 +23,10 @@ func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 
 func get_input():
+	# Temporary quick quit
+	if Input.is_action_pressed("ui_quit"):
+		get_tree().quit()
+	
 	var current_animation = state_machine.get_current_node()
 	velocity.y += GRAVITY
 	
