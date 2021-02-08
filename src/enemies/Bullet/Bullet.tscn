@@ -7,6 +7,8 @@
 extents = Vector2( 3, 1 )
 
 [node name="Bullet" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -19,4 +21,5 @@ shape = SubResource( 1 )
 [node name="DeathTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

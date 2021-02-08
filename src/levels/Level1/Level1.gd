@@ -30,3 +30,7 @@ func set_night_level(amount):
 
 func _on_TowerInside_body_entered(body):
 	night = true
+	$Player/Player.zoom_camera_to(Vector2(0.8,0.8))
+
+func _on_TowerInside_body_exited(body):
+	$Player/Player.zoom_camera_to(Vector2(1,1))

@@ -365,12 +365,14 @@ parameters/playback = SubResource( 44 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 8 )]
-
 [node name="ParallaxBackground" parent="Camera2D" instance=ExtResource( 3 )]
 
 [node name="ParallaxForeground" parent="Camera2D" instance=ExtResource( 9 )]
 layer = 100
+
+[node name="Effects" type="Node" parent="Camera2D"]
+
+[node name="ScreenShake" parent="Camera2D/Effects" instance=ExtResource( 8 )]
 
 [node name="HitTimer" type="Timer" parent="."]
 wait_time = 0.5

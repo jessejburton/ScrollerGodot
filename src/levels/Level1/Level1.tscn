@@ -104,7 +104,7 @@ tile_data = PoolIntArray( -1245146, 1073741836, 0, -1245142, 12, 0, -1179616, 2,
 [node name="Player" type="Node" parent="."]
 
 [node name="Player" parent="Player" instance=ExtResource( 4 )]
-position = Vector2( 698, -288 )
+position = Vector2( 208, -128 )
 
 [node name="Zones" type="Node" parent="."]
 
@@ -132,7 +132,6 @@ collision_layer = 32
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/EventZones/TowerInside"]
-visible = false
 position = Vector2( -16, 64 )
 shape = SubResource( 3 )
 
@@ -146,6 +145,7 @@ autoplay = true
 [connection signal="body_entered" from="Zones/FallZones/FallZone" to="Player/Player" method="_on_FallZone_body_entered"]
 [connection signal="body_entered" from="Zones/FallZones/FallZone2" to="Player/Player" method="_on_FallZone_body_entered"]
 [connection signal="body_entered" from="Zones/EventZones/TowerInside" to="." method="_on_TowerInside_body_entered"]
+[connection signal="body_exited" from="Zones/EventZones/TowerInside" to="." method="_on_TowerInside_body_exited"]
 
 [editable path="Zones/FallZones/FallZone"]
 

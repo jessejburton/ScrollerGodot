@@ -1,42 +1,28 @@
 extends Node
 
-const TRANS = Tween.TRANS_SINE
-const EASE = Tween.EASE_IN_OUT
+var current_shake_priority = 0
 
-export var amplitude = 0
-var priority = 0
+onready var camera = get_parent().get_parent()
 
-onready var camera = get_parent()
-
-func start(duration = 0.2, frequency = 5, amplitude = 5):
-	if priority >= self.priority:
-		self.priority
-		self.amplitude = amplitude
-		
-		$Timers/Duration.wait_time = duration
-		$Timers/Frequency.wait_time = 1 / float(frequency)
-		$Timers/Duration.start()
-		$Timers/Frequency.start()
-		
-		_new_shake()
+func _ready():
+	pass
 	
-func _new_shake():
-	var rand = Vector2()
-	rand.x = rand_range(-amplitude, amplitude)
-	rand.y = rand_range(-amplitude, amplitude)
+func move_camera(vector):
+	camera.offset = Vector2(rand_range(-vector.x, vector.x), rand_range(-vector.y, vector.y))
 
-	$Tween.interpolate_property(camera, "offset", camera.offset, rand, $Timers/Frequency.wait_time, TRANS, EASE)
+func screen_shake(shake_length, shake_power, shake_priority):
+	if shake_priority > current_shake_priority:
+		current_shake_priority = shake_priority
+		$Tween.interpolate_method(
+			self, 
+			"move_camera", 
+			Vector2(shake_power, shake_power), 
+			Vector2(0,0), shake_length, 
+			Tween.TRANS_SINE, 
+			Tween.EASE_OUT, 
+			0
+		)
 	$Tween.start()
 	
-func _reset():
-	$Tween.interpolate_property(camera, "offset", camera.offset, Vector2(), $Timers/Frequency.wait_time, TRANS, EASE)
-	$Tween.start()	
-	
-	priority = 0
-
-func _on_FrequencyTimer_timeout():
-	_new_shake()
-
-func _on_Duration_timeout():
-	_reset()
-	$Timers/Duration.stop()
+func _on_Tween_tween_completed(object, key):
+	current_shake_priority = 0

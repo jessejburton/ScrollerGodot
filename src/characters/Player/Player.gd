@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-onready var camera = get_node("Camera2D").get_node("Player")
+onready var camera = get_node("Camera2D")
 
 # Constants
 const GRAVITY = 10
@@ -14,7 +14,7 @@ var friction_modifier = 0
 
 # Variables
 var state_machine
-var is_in_air = false
+var is_in_air = true
 var velocity = Vector2.ZERO
 var max_jumps = 2
 var jumps_left = max_jumps
@@ -86,11 +86,10 @@ func get_input():
 			jumps_left -= 1
 		
 		if is_on_floor():
-			if is_in_air == true:
+			if is_in_air == true: # Just Landed
 				has_attacked_in_air = false
-				friction_modifier = 0	
-				is_falling = false;
-				if fall_time > 50:
+				friction_modifier = 0					
+				if fall_time > 100:
 					land_hard()
 				else:
 					land()
@@ -130,9 +129,11 @@ func _physics_process(delta):
 			var is_enemy = collider.is_in_group("stompable")
 			
 			if is_enemy:
-				if is_on_floor() and collision.normal.dot(Vector2.UP) > 0.3:	
+				if is_on_floor() and collision.normal.dot(Vector2.UP) > 0.3:
+					OS.delay_msec(15)
+					$Camera2D/Effects/ScreenShake.screen_shake(0.9, 5, 10)		
+					zoom_camera_to(Vector2(1,1), Vector2(0.9,0.9), 2)
 					velocity.y = collider.stomp_height
-					print("stomp")
 					collider.damage()
 				else:
 					damage()
@@ -179,20 +180,24 @@ func air_attack():
 
 func land():
 	is_falling = false
-	jumps_left = max_jumps
 	is_in_air = false
+	jumps_left = max_jumps
 	state_machine.travel("Land")
 
 func land_hard():
-	$Camera2D/ScreenShake.start()
+	OS.delay_msec(100) # Screen Freeze Delay for Game Juice
+	$Camera2D/Effects/ScreenShake.screen_shake(0.3, 3, 1)
+	zoom_camera_to(Vector2(1,1), Vector2(0.8,0.8), 2)
 	velocity.x = 0
 	is_falling = false	
-	jumps_left = max_jumps
 	is_in_air = false
+	jumps_left = max_jumps
 	state_machine.travel("LandHard")
 	
 func damage():
-	$Camera2D/ScreenShake.start(0.2, 5, 15)
+	OS.delay_msec(100) # Screen Freeze Delay for Game Juice
+	$Camera2D/Effects/ScreenShake.screen_shake(0.9, 5, 100)	
+	zoom_camera_to(Vector2(1,1), Vector2(0.8,0.8), 2)
 	$Sounds/Hit.play()	
 	is_hit = true
 	velocity.y = 200
@@ -221,27 +226,15 @@ func _on_FallZone_body_entered(body):
 func _on_ResetTimer_timeout():
 	restart_level()
 	
-func zoom_camera_to(to, speed = zoom_speed):
+func zoom_camera_to(to, from = camera.zoom, speed = zoom_speed):
 	zoom_speed = speed
-	start_zoom = camera.zoom
+	start_zoom = from
 	target_zoom = to
 	is_zooming = true
 	
 func set_camera_zoom(vec):
 	camera.zoom.x = vec.x
 	camera.zoom.y = vec.y	
-
-# TODO - shrink the margins with the zoom
-# Maybe incorporate right into the zoom function
-func _on_TowerEntrance_body_entered(body):
-	#camera.drag_margin_left = 0.1
-	#camera.drag_margin_right = 0.1
-	zoom_camera_to(Vector2(0.8,0.8))
-
-func _on_TowerEntrance_body_exited(body):
-	#camera.drag_margin_left = 0.2
-	#camera.drag_margin_right = 0.2
-	zoom_camera_to(Vector2(1,1))
 	
 func _on_HitTimer_timeout():
 	is_hit = false

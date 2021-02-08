@@ -92,6 +92,8 @@ func idle():
 	velocity.x = 0
 	
 func death():
+	OS.delay_msec(15)
+	Player.get_node("Camera2D/Effects/ScreenShake").screen_shake(0.9, 5, 10)		
 	is_attacking = false # In case he was mid attack	
 	$Sounds/Death.play()
 	is_dead = true
@@ -106,6 +108,9 @@ func death():
 func damage():
 	is_attacking = false # In case he was mid attack	
 	if not is_hit:
+		OS.delay_msec(15)
+		Player.get_node("Camera2D/Effects/ScreenShake").screen_shake(0.9, 5, 10)	
+		Player.zoom_camera_to(Vector2(1,1), Vector2(0.9,0.9), 2)
 		$Sounds/Hit.play()
 		is_hit = true
 		health -= 1
