@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mario_theme.ogg-404ccd393e3af12642619649ef2ab01d.oggstr"
+
+[deps]
+
+source_file="res://assets/music/mario_theme.ogg"
+dest_files=[ "res://.import/mario_theme.ogg-404ccd393e3af12642619649ef2ab01d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

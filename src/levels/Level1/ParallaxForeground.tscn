@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/tilemaps/DesertTileset.tres" type="TileSet" id=1]
+
+[node name="ParallaxForeground" type="ParallaxBackground"]
+
+[node name="RuinsFront" type="ParallaxLayer" parent="."]
+modulate = Color( 0.172549, 0.160784, 0.0862745, 1 )
+position = Vector2( 16, 192 )
+scale = Vector2( 2, 2 )
+motion_scale = Vector2( 2, 2 )
+
+[node name="TileMap" type="TileMap" parent="RuinsFront"]
+position = Vector2( 1.5, 7.5 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 131067, 536870967, 0, 131069, 56, 0, 65556, 58, 0, 65576, 536871029, 0, 196604, 10, 0, 131075, 536870970, 0, 131080, 536871030, 0, 131081, 117, 0, 131092, 115, 0, 131093, 47, 0, 131095, 55, 0, 196609, 1610612793, 0, 196611, 536870969, 0, 196613, 536870969, 0, 196615, 536870969, 0, 196620, 120, 0, 196628, 119, 0, 196629, -1073741768, 0, 196649, 118, 0, 262144, 536870967, 0, 262153, 1073741994, 0, 262154, 1610612906, 0, 262183, 536871027, 0, 262184, 57, 0, 262186, 1610612793, 0, 327689, 1073741950, 0, 327690, 536871038, 0, 327691, 1610612858, 0, 327692, 1610612860, 0 )
