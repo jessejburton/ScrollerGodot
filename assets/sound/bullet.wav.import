@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bullet.wav-1d3480130b65a851f7a2216bf9867e37.sample"
+
+[deps]
+
+source_file="res://assets/sound/bullet.wav"
+dest_files=[ "res://.import/bullet.wav-1d3480130b65a851f7a2216bf9867e37.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

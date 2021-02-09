@@ -364,6 +364,8 @@ parameters/playback = SubResource( 44 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
 
 [node name="ParallaxBackground" parent="Camera2D" instance=ExtResource( 3 )]
 

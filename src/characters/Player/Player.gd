@@ -76,7 +76,6 @@ func get_input():
 		if is_attacking: velocity.x = lerp(velocity.x, 0, FRICTION + friction_modifier)			
 		
 		if Input.is_action_just_pressed("ui_attack"):
-			$Sounds/Attack.play()	
 			attack()		
 		
 		if Input.is_action_just_pressed("ui_up") and jumps_left > 0 and !is_attacking:
@@ -171,12 +170,14 @@ func idle():
 	state_machine.travel("Idle")
 
 func attack():
+	$Sounds/Attack.play()	
 	state_machine.travel("Attack")
 
 func air_attack():
+	$Sounds/Attack.play()	
 	has_attacked_in_air = true
 	state_machine.travel("AttackAir")
-	velocity.y = 200
+	velocity.y += 20
 
 func land():
 	is_falling = false

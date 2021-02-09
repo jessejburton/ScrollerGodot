@@ -87,15 +87,16 @@ func charge(direction):
 
 func attack():
 	is_firing = true
-	state_machine.travel("Attack")	
+	$Muzzle.set_emitting(true)	
+	state_machine.travel("Attack")
 	$Timers/FiringTimer.start()
 	$Timers/AttackTimer.start()
 	
 func fire():
-	$Timers/FireRateTimer.start()
 	var bullet = Bullet.instance()
 	bullet.start_at($BulletSpawn.global_position, $BulletSpawn.rotation)
 	get_tree().current_scene.add_child(bullet)
+	$Timers/FireRateTimer.start()
 	
 func idle():
 	state_machine.travel("Idle")	
@@ -146,7 +147,6 @@ func _on_HitTimer_timeout():
 
 func _on_Detection_body_entered(body):
 	if not is_attacking and not is_dead:
-		$Sounds/Attack.play()
 		charge((Player.position - position).normalized().x)
 
 func _on_AttackTimer_timeout():
@@ -160,3 +160,4 @@ func _on_ChargeTimer_timeout():
 
 func _on_FiringTimer_timeout():
 	is_firing = false
+	$Muzzle.set_emitting(false)	
