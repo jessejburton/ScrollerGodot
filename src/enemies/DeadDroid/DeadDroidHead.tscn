@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/sprites/dead_droid_head_sprite_sheet.png" type="Texture" id=1]
+[ext_resource path="res://src/collisions/HurtBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/enemies/DeadDroid/DeadDroidHead.gd" type="Script" id=3]
+[ext_resource path="res://src/menus/Indicators/HealthBar/HealthBar.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 6.0
+
+[node name="DeadDroidHead" type="KinematicBody2D"]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+flip_h = true
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )
+
+[node name="HurtBox" parent="." instance=ExtResource( 2 )]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0, 1 )
+shape = SubResource( 2 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 4 )]
+margin_left = -13.0
+margin_top = -15.0
+margin_right = 17.0
+margin_bottom = -12.0
+
+[node name="ResetTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+[connection signal="on_health_updated" from="." to="HealthBar" method="_on_health_updated"]
+[connection signal="timeout" from="ResetTimer" to="." method="_on_ResetTimer_timeout"]
+
+[editable path="HurtBox"]

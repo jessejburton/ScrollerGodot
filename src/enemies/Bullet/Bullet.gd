@@ -25,6 +25,5 @@ func _physics_process(delta):
 func _on_DeathTimer_timeout():
 	queue_free()
 
-
 func _on_Bullet_body_entered(body):
 	body.damage()

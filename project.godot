@@ -16,8 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Scroller"
-run/main_scene="res://src/levels/Level1/Level1.tscn"
+run/main_scene="res://src/levels/Home/Home.tscn"
 config/icon="res://assets/sprites/icon.png"
+
+[autoload]
+
+Config="*res://src/singletons/Config.gd"
+Hud="*res://src/singletons/Hud/HUD.tscn"
+SoundController="*res://src/singletons/SoundController/SoundController.tscn"
 
 [display]
 

@@ -10,7 +10,10 @@ func _ready():
 func move_camera(vector):
 	camera.offset = Vector2(rand_range(-vector.x, vector.x), rand_range(-vector.y, vector.y))
 
-func screen_shake(shake_length, shake_power, shake_priority):
+func screen_shake(shake_length:float, shake_power:int, shake_priority:int, zoom_amount:float = 0.9):
+	if zoom_amount > 0 and zoom_amount < 1:
+		get_parent().get_parent().get_parent().zoom_camera_to(Vector2(camera.zoom.x,camera.zoom.y),Vector2(max(camera.zoom.x * zoom_amount, 0.7),max(camera.zoom.y * zoom_amount, 0.7)))
+	
 	if shake_priority > current_shake_priority:
 		current_shake_priority = shake_priority
 		$Tween.interpolate_method(

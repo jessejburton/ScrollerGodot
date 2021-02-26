@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sword-clash-01.wav-73cc1599b92cf6f313051dcdc3f7d215.sample"
+
+[deps]
+
+source_file="res://assets/sound/sword-clash-01.wav"
+dest_files=[ "res://.import/sword-clash-01.wav-73cc1599b92cf6f313051dcdc3f7d215.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

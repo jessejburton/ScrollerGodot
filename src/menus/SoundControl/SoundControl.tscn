@@ -1,0 +1,132 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/menus/Themes/MenuFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/menus/SoundControl/SoundControl.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=4]
+colors = PoolColorArray( 0.0664063, 0.0664063, 0.0664063, 1, 0.363281, 0.344833, 0.344833, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 4 )
+width = 320
+
+[node name="SoundControl" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 1.52588e-05
+texture = SubResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+margin_right = 320.0
+margin_bottom = 180.0
+
+[node name="Menu" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+margin_left = 83.0
+margin_top = 59.0
+margin_right = 237.0
+margin_bottom = 121.0
+
+[node name="Music" type="HBoxContainer" parent="MarginContainer/CenterContainer/Menu"]
+margin_right = 154.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+
+[node name="Setting" type="HBoxContainer" parent="MarginContainer/CenterContainer/Menu/Music"]
+margin_right = 75.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 75, 0 )
+
+[node name="MusicVolume" type="Label" parent="MarginContainer/CenterContainer/Menu/Music/Setting"]
+margin_right = 61.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 1 )
+text = "Music Volume"
+
+[node name="Control" type="HBoxContainer" parent="MarginContainer/CenterContainer/Menu/Music"]
+margin_left = 79.0
+margin_right = 154.0
+margin_bottom = 18.0
+
+[node name="VolumeContol" type="HSlider" parent="MarginContainer/CenterContainer/Menu/Music/Control"]
+margin_right = 75.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 75, 0 )
+value = 100.0
+
+[node name="Ambient" type="HBoxContainer" parent="MarginContainer/CenterContainer/Menu"]
+margin_top = 22.0
+margin_right = 154.0
+margin_bottom = 40.0
+
+[node name="Setting" type="HBoxContainer" parent="MarginContainer/CenterContainer/Menu/Ambient"]
+margin_right = 75.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 75, 0 )
+
+[node name="AmbientVolume" type="Label" parent="MarginContainer/CenterContainer/Menu/Ambient/Setting"]
+margin_right = 72.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 1 )
+text = "Ambient Volume"
+
+[node name="Control" type="HBoxContainer" parent="MarginContainer/CenterContainer/Menu/Ambient"]
+margin_left = 79.0
+margin_right = 154.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="VolumeContol" type="HSlider" parent="MarginContainer/CenterContainer/Menu/Ambient/Control"]
+margin_right = 75.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 75, 0 )
+value = 100.0
+
+[node name="Sounds" type="HBoxContainer" parent="MarginContainer/CenterContainer/Menu"]
+margin_top = 44.0
+margin_right = 154.0
+margin_bottom = 62.0
+
+[node name="Setting" type="HBoxContainer" parent="MarginContainer/CenterContainer/Menu/Sounds"]
+margin_right = 75.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 75, 0 )
+
+[node name="SoundstVolume" type="Label" parent="MarginContainer/CenterContainer/Menu/Sounds/Setting"]
+margin_right = 68.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 1 )
+text = "Effects Volume"
+
+[node name="Control" type="HBoxContainer" parent="MarginContainer/CenterContainer/Menu/Sounds"]
+margin_left = 79.0
+margin_right = 154.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="VolumeContol" type="HSlider" parent="MarginContainer/CenterContainer/Menu/Sounds/Control"]
+margin_right = 75.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 75, 0 )
+value = 100.0
+[connection signal="value_changed" from="MarginContainer/CenterContainer/Menu/Music/Control/VolumeContol" to="." method="_on_MusicVolumeContol_value_changed"]
+[connection signal="value_changed" from="MarginContainer/CenterContainer/Menu/Ambient/Control/VolumeContol" to="." method="_on_AmbientVolumeContol_value_changed"]
+[connection signal="value_changed" from="MarginContainer/CenterContainer/Menu/Sounds/Control/VolumeContol" to="." method="_on_SoundsVolumeContol_value_changed"]

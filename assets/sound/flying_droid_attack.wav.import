@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/flying_droid_attack.wav-c277a0bfbea6699ade8116c3c3f9e21e.sample"
+
+[deps]
+
+source_file="res://assets/sound/flying_droid_attack.wav"
+dest_files=[ "res://.import/flying_droid_attack.wav-c277a0bfbea6699ade8116c3c3f9e21e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

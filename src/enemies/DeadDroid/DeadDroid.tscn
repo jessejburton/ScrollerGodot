@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/dead_droid_body.png" type="Texture" id=1]
+[ext_resource path="res://src/enemies/DeadDroid/DeadDroidHead.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3, 4 )
+
+[node name="DeadDroid" type="KinematicBody2D"]
+collision_layer = 64
+
+[node name="BodySprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 2, 3 )
+shape = SubResource( 1 )
+
+[node name="DeadDroidHead" parent="." instance=ExtResource( 2 )]
+position = Vector2( -5, -6 )
+rotation = -0.148353
